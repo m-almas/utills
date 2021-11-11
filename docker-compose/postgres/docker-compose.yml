@@ -1,0 +1,20 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=secret
+    volumes:
+    - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command:
+      - "-c"
+      - "config-file=/etc/postgresql/postgresql.conf"
+networks:
+  default:
+    external: true
+    name: test-network
